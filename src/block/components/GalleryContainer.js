@@ -87,7 +87,7 @@ const GalleryContainer = ({ element }) => {
 
   useEffect(() => {
     if (images.length > 0) {
-      console.log('GalleryContainer => useEffect images', images);
+      // console.log('GalleryContainer => useEffect attributes', attributes);
     }
   }, [images]);
 

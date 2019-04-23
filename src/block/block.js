@@ -43,7 +43,7 @@ registerBlockType( 'jp/guten-block-gallery', {
       type: 'number',
       default: 15,
     },
-    autoPlay: {
+    isAutoPlay: {
       type: 'boolean',
       default: true,
     },
@@ -51,13 +51,13 @@ registerBlockType( 'jp/guten-block-gallery', {
       type: 'number',
       default: 3,
     },
-    arrowNavigation: {
+    isArrowNavigation: {
       type: 'boolean',
       default: true,
     },
-    pageDots: {
+    isPageDots: {
       type: 'boolean',
-      default: false,
+      default: true,
     },
   },
 
@@ -68,10 +68,10 @@ registerBlockType( 'jp/guten-block-gallery', {
       imagesPerRow,
       numerOfRows,
       gap,
-      autoPlay,
+      isAutoPlay,
       autoPlaySpeed,
-      arrowNavigation,
-      pageDots,
+      isArrowNavigation,
+      isPageDots,
     } = attributes;
 
     const onSelectImages = (selectedImages) => {
@@ -170,11 +170,11 @@ registerBlockType( 'jp/guten-block-gallery', {
           <PanelBody title={ __( 'Slider Settings' ) } initialOpen={ true }>
             <ToggleControl
               label={ __( 'Autoplay Slides' ) }
-              checked={ !! autoPlay }
-              onChange={() => setAttributes({ autoPlay: ! autoPlay })}
+              checked={ !! isAutoPlay }
+              onChange={() => setAttributes({ isAutoPlay: ! isAutoPlay })}
               help={ getAutoPlayHelp }
             />
-            { autoPlay && <SelectControl
+            { isAutoPlay && <SelectControl
               label={ __( 'Transition Speed' ) }
               value={ autoPlaySpeed }
               onChange={(value) => setAttributes({ autoPlaySpeed: value })}
@@ -182,56 +182,58 @@ registerBlockType( 'jp/guten-block-gallery', {
             /> }
             <ToggleControl
               label={ __( 'Arrow Navigation' ) }
-              checked={ !! arrowNavigation }
-              onChange={() => setAttributes({ arrowNavigation: ! arrowNavigation })}
+              checked={ !! isArrowNavigation }
+              onChange={() => setAttributes({ isArrowNavigation: ! isArrowNavigation })}
               help={checked => checked ? __( 'Showing slide navigation arrows.' ) : __( 'Toggle to show slide navigation arrows.' )}
             />
             <ToggleControl
               label={ __( 'Dot Navigation' ) }
-              checked={ !! pageDots }
-              onChange={() => setAttributes({ pageDots: ! pageDots })}
+              checked={ !! isPageDots }
+              onChange={() => setAttributes({ isPageDots: ! isPageDots })}
               help={checked => checked ? __( 'Showing dot navigation arrows.' ) : __( 'Toggle to show dot navigation.' )}
             />
           </PanelBody>
         </InspectorControls>
-        <div
-          className={`jp-guten-block-gallery ${ className }`}
-          style={{
-            gridGap: gap,
-            gridTemplateColumns: `repeat(${ imagesPerRow }, auto)`,
-          }}
-        >
-          {images.map((img, index) => {
-            const {
-              sizes: { medium },
-            } = img;
+        <div className="jp-guten-block-gallery-be-container">
+          <div
+            className={`jp-guten-block-gallery ${ className }`}
+            style={{
+              gridGap: gap,
+              gridTemplateColumns: `repeat(${ imagesPerRow }, auto)`,
+            }}
+          >
+            {images.map((img, index) => {
+              const {
+                sizes: { medium },
+              } = img;
 
-            // Math.ceil(21 images / 5 imagesPerRow) => 5 => 2 rows ==> 2 % 2 = 0 | 2 % 1
-            // 5 index / 5 imagesPerRow => rad 1 => 1 % 2 === 1
-            // 10 index / 5 imagesPerRow => rad 2 => 2 % 2 === 0
-            // 15 index / 5 imagesPerRow => rad 3 => 3 % 2 === 0
-            // 20 index / 5 imagesPerRow => rad 4 4 % 2 === 0
+              // Math.ceil(21 images / 5 imagesPerRow) => 5 => 2 rows ==> 2 % 2 = 0 | 2 % 1
+              // 5 index / 5 imagesPerRow => rad 1 => 1 % 2 === 1
+              // 10 index / 5 imagesPerRow => rad 2 => 2 % 2 === 0
+              // 15 index / 5 imagesPerRow => rad 3 => 3 % 2 === 0
+              // 20 index / 5 imagesPerRow => rad 4 4 % 2 === 0
 
-            return (
-              <Fragment key={img.id || img.url}>
-                <div className={ Math.ceil((index + 1) / imagesPerRow) % numerOfRows === 0 ? 'jp-guten-gallery-item jp-guten-gallery-item-column-gap' : 'jp-guten-gallery-item' }>
-                  <img src={medium.url} alt={img.alt} />
-                  {/* <GalleryImage
-                    className="jp-guten-gallery-item blocks-gallery-item thumbnail
-                    url={ img.url }
-                    alt={ img.alt }
-                    id={ img.id }
-                    isSelected={ isSelected && this.state.selectedImage === index }
-                    onRemove={ this.onRemoveImage( index ) }
-                    onSelect={ this.onSelectImage( index ) }
-                    setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
-                    caption={ img.caption }
-                    aria-label={ ariaLabel }
-                  /> */}
-                </div>
-              </Fragment>
-            );
-          })}
+              return (
+                <Fragment key={img.id || img.url}>
+                  <div className={ Math.ceil((index + 1) / imagesPerRow) % numerOfRows === 0 ? 'jp-guten-gallery-item jp-guten-gallery-item-column-gap' : 'jp-guten-gallery-item' }>
+                    <img src={medium.url} alt={img.alt} />
+                    {/* <GalleryImage
+                      className="jp-guten-gallery-item blocks-gallery-item thumbnail
+                      url={ img.url }
+                      alt={ img.alt }
+                      id={ img.id }
+                      isSelected={ isSelected && this.state.selectedImage === index }
+                      onRemove={ this.onRemoveImage( index ) }
+                      onSelect={ this.onSelectImage( index ) }
+                      setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
+                      caption={ img.caption }
+                      aria-label={ ariaLabel }
+                    /> */}
+                  </div>
+                </Fragment>
+              );
+            })}
+          </div>
         </div>
       </Fragment>
     );

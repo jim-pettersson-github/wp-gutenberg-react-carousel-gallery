@@ -99,9 +99,21 @@ function jp_guten_gallery_dynamic_block() {
 					'type'    => 'number',
 					'default' => 15,
 				],
-				'pageDots' => [
+				'isPageDots' => [
 					'type'    => 'boolean',
-					'default' => false,
+					'default' => true,
+				],
+				'isArrowNavigation' => [
+					'type'    => 'boolean',
+					'default' => true,
+				],
+				'isAutoPlay' => [
+					'type'    => 'boolean',
+					'default' => true,
+				],
+				'autoPlaySpeed' => [
+					'type'    => 'number',
+					'default' => 3,
 				]
 			],
 			'render_callback' => 'render_jp_guten_gallery_dynamic_block' 
@@ -167,7 +179,7 @@ function render_jp_guten_gallery_dynamic_block( $attributes ) {
 	);
 
 	// return json_encode( array_column($attributes['images'], 'id') );
-	// return d( $attributes );
+	// return d( $filterd_attributes );
 	// return $block_content . d( $attributes["images"][0] );
 	return $block_content;
 	

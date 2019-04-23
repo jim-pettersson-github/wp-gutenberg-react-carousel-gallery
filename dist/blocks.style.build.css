@@ -9,32 +9,32 @@
  *
  * CSS for both Frontend+Backend.
  */
-.jp-guten-block-gallery-fe-container {
+.jp-guten-block-gallery-fe-container, .jp-guten-block-gallery-be-container {
   position: relative; }
-  .jp-guten-block-gallery-fe-container .jp-guten-block-gallery {
+  .jp-guten-block-gallery-fe-container .jp-guten-block-gallery, .jp-guten-block-gallery-be-container .jp-guten-block-gallery {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(3, auto);
     position: relative;
     overflow: hidden; }
-  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item {
+  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item, .jp-guten-block-gallery-be-container .jp-guten-gallery-item {
     line-height: 0;
     list-style-type: none; }
-  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item img {
+  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item img, .jp-guten-block-gallery-be-container .jp-guten-gallery-item img {
     height: 100%;
     width: 100%;
     -o-object-fit: cover;
        object-fit: cover; }
-  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item-column-gap {
+  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item-column-gap, .jp-guten-block-gallery-be-container .jp-guten-gallery-item-column-gap {
     margin-bottom: 40px; }
-  .jp-guten-block-gallery-fe-container .prev-next-theme {
+  .jp-guten-block-gallery-fe-container .prev-next-theme, .jp-guten-block-gallery-be-container .prev-next-theme {
     color: white;
     font-weight: bold;
     font-size: 18px;
     padding: 16px;
     margin-top: -22px;
     border-radius: 0 3px 3px 0; }
-  .jp-guten-block-gallery-fe-container .prev, .jp-guten-block-gallery-fe-container .next {
+  .jp-guten-block-gallery-fe-container .prev, .jp-guten-block-gallery-fe-container .next, .jp-guten-block-gallery-be-container .prev, .jp-guten-block-gallery-be-container .next {
     cursor: pointer;
     opacity: .3;
     position: absolute;
@@ -52,19 +52,19 @@
     outline: none;
     border: 0;
     background: none; }
-  .jp-guten-block-gallery-fe-container .prev {
+  .jp-guten-block-gallery-fe-container .prev, .jp-guten-block-gallery-be-container .prev {
     left: -48px; }
-  .jp-guten-block-gallery-fe-container .next {
+  .jp-guten-block-gallery-fe-container .next, .jp-guten-block-gallery-be-container .next {
     right: -48px; }
-  .jp-guten-block-gallery-fe-container .prev:hover, .jp-guten-block-gallery-fe-container .next:hover {
+  .jp-guten-block-gallery-fe-container .prev:hover, .jp-guten-block-gallery-fe-container .next:hover, .jp-guten-block-gallery-be-container .prev:hover, .jp-guten-block-gallery-be-container .next:hover {
     opacity: .5;
     -webkit-transform: scale(1.1);
         -ms-transform: scale(1.1);
             transform: scale(1.1); }
-  .jp-guten-block-gallery-fe-container .dot-panel {
+  .jp-guten-block-gallery-fe-container .dot-panel, .jp-guten-block-gallery-be-container .dot-panel {
     position: relative;
     bottom: 25px; }
-    .jp-guten-block-gallery-fe-container .dot-panel .dot {
+    .jp-guten-block-gallery-fe-container .dot-panel .dot, .jp-guten-block-gallery-be-container .dot-panel .dot {
       cursor: pointer;
       height: 15px;
       width: 15px;
@@ -76,7 +76,7 @@
       -webkit-transition: background-color 0.6s ease;
       -o-transition: background-color 0.6s ease;
       transition: background-color 0.6s ease; }
-    .jp-guten-block-gallery-fe-container .dot-panel .active, .jp-guten-block-gallery-fe-container .dot-panel .dot:hover {
+    .jp-guten-block-gallery-fe-container .dot-panel .active, .jp-guten-block-gallery-fe-container .dot-panel .dot:hover, .jp-guten-block-gallery-be-container .dot-panel .active, .jp-guten-block-gallery-be-container .dot-panel .dot:hover {
       background-color: #717171; }
 
 .animate-right {
