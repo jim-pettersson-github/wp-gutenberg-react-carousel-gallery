@@ -1,0 +1,141 @@
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+
+// https://www.w3schools.com/howto/howto_js_slideshow.asp
+// http://css3.bradshawenterprises.com/sliding/
+
+
+
+.jp-guten-block-gallery-fe-container {
+  position: relative;
+
+  .jp-guten-block-gallery {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, auto);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .jp-guten-gallery-item {
+    line-height: 0;
+    list-style-type: none;
+  }
+  .jp-guten-gallery-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .jp-guten-gallery-item-column-gap {
+    margin-bottom: 40px;
+  }
+
+  .prev-next-theme {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 16px;
+    margin-top: -22px;
+    border-radius: 0 3px 3px 0;
+
+  }
+  .prev, .next {
+    cursor: pointer;
+    opacity: .3;
+    position: absolute;
+    top: 45%;
+    transition: 0.6s ease;
+    user-select: none;
+    transition: all 200ms ease-in;
+    outline: none;
+    border: 0;
+    background: none;
+  }
+  .prev {
+    left: -48px;
+  }
+  .next {
+    right: -48px;
+  }
+  .prev:hover, .next:hover {
+    opacity: .5;
+    transform: scale(1.1);
+  }
+
+  .dot-panel {
+    position: relative;
+    bottom: 25px;
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      border: 0px solid #bbb;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+  }
+}
+
+.animate-right {
+  position: relative;
+  animation: animateright .4s;
+}
+@keyframes animateright {
+  from {
+    right: -300px;
+    opacity: .3;
+  }
+
+  to {
+    right: 0;
+    opacity: 1;
+  }
+}
+.animate-left {
+  position: relative;
+  animation: animateleft .4s;
+}
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: .3;
+  }
+
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+
+@media all and (max-width: 830px) {
+  .jp-guten-block-gallery-fe-container {
+    .jp-guten-block-gallery {
+      grid-template-columns: repeat(3, auto)!important;
+    }
+    .prev, .next {
+      opacity: .7;
+      top: 40%;
+    }
+    .prev {
+      left: -20px;
+    }
+    .next {
+      right: -20px;
+    }
+    .prev:hover, .next:hover {
+      opacity: 1;
+    }
+  }
+}

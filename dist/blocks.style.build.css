@@ -1,0 +1,135 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+.jp-guten-block-gallery-fe-container {
+  position: relative; }
+  .jp-guten-block-gallery-fe-container .jp-guten-block-gallery {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, auto);
+    position: relative;
+    overflow: hidden; }
+  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item {
+    line-height: 0;
+    list-style-type: none; }
+  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover; }
+  .jp-guten-block-gallery-fe-container .jp-guten-gallery-item-column-gap {
+    margin-bottom: 40px; }
+  .jp-guten-block-gallery-fe-container .prev-next-theme {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 16px;
+    margin-top: -22px;
+    border-radius: 0 3px 3px 0; }
+  .jp-guten-block-gallery-fe-container .prev, .jp-guten-block-gallery-fe-container .next {
+    cursor: pointer;
+    opacity: .3;
+    position: absolute;
+    top: 45%;
+    -webkit-transition: 0.6s ease;
+    -o-transition: 0.6s ease;
+    transition: 0.6s ease;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-transition: all 200ms ease-in;
+    -o-transition: all 200ms ease-in;
+    transition: all 200ms ease-in;
+    outline: none;
+    border: 0;
+    background: none; }
+  .jp-guten-block-gallery-fe-container .prev {
+    left: -48px; }
+  .jp-guten-block-gallery-fe-container .next {
+    right: -48px; }
+  .jp-guten-block-gallery-fe-container .prev:hover, .jp-guten-block-gallery-fe-container .next:hover {
+    opacity: .5;
+    -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+            transform: scale(1.1); }
+  .jp-guten-block-gallery-fe-container .dot-panel {
+    position: relative;
+    bottom: 25px; }
+    .jp-guten-block-gallery-fe-container .dot-panel .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      border: 0px solid #bbb;
+      display: inline-block;
+      -webkit-transition: background-color 0.6s ease;
+      -o-transition: background-color 0.6s ease;
+      transition: background-color 0.6s ease; }
+    .jp-guten-block-gallery-fe-container .dot-panel .active, .jp-guten-block-gallery-fe-container .dot-panel .dot:hover {
+      background-color: #717171; }
+
+.animate-right {
+  position: relative;
+  -webkit-animation: animateright .4s;
+          animation: animateright .4s; }
+
+@-webkit-keyframes animateright {
+  from {
+    right: -300px;
+    opacity: .3; }
+  to {
+    right: 0;
+    opacity: 1; } }
+
+@keyframes animateright {
+  from {
+    right: -300px;
+    opacity: .3; }
+  to {
+    right: 0;
+    opacity: 1; } }
+
+.animate-left {
+  position: relative;
+  -webkit-animation: animateleft .4s;
+          animation: animateleft .4s; }
+
+@-webkit-keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: .3; }
+  to {
+    left: 0;
+    opacity: 1; } }
+
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: .3; }
+  to {
+    left: 0;
+    opacity: 1; } }
+
+@media all and (max-width: 830px) {
+  .jp-guten-block-gallery-fe-container .jp-guten-block-gallery {
+    grid-template-columns: repeat(3, auto) !important; }
+  .jp-guten-block-gallery-fe-container .prev, .jp-guten-block-gallery-fe-container .next {
+    opacity: .7;
+    top: 40%; }
+  .jp-guten-block-gallery-fe-container .prev {
+    left: -20px; }
+  .jp-guten-block-gallery-fe-container .next {
+    right: -20px; }
+  .jp-guten-block-gallery-fe-container .prev:hover, .jp-guten-block-gallery-fe-container .next:hover {
+    opacity: 1; } }
