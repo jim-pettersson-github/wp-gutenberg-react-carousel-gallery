@@ -1,5 +1,6 @@
 const { useEffect, useRef } = wp.element;
 
+// https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
 
@@ -10,13 +11,19 @@ export const useInterval = (callback, delay) => {
 
   // Set up the interval.
   useEffect(() => {
-    function tick() {
+    function handler() {
       savedCallback.current();
     }
-    if (delay !== null) {
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
+    let intervalId = null;
+    if (delay > 0) {
+      intervalId = setInterval(handler, delay);
     }
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
   }, [delay]);
 };
 

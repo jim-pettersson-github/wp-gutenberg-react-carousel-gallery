@@ -2,12 +2,15 @@ const { Fragment, useState, useEffect } = wp.element;
 import GalleryImage from './GalleryImage';
 import Dots from './CarouselDots';
 import useInterval from './useInterval';
+import useHover from './useHover';
 import { Arrow } from './Icons';
 
-const Carousel = ({settings, images, className, defaultSettings }) => {
+const Carousel = ({ settings, images, className, defaultSettings }) => {
   const [slideIndex, setSlideIndex] = useState(1);
-  const [isAutoPlayRunning, setIsAutoPlayRunning] = useState(false);
+  const [isPrevNextClicked, setIsPrevNextClicked] = useState(false);
   const [animationClass, setAnimationClass] = useState('');
+  const [carouselDelay, setCarouselDelay] = useState(0);
+  const [hoverRef, isHovered] = useHover();
 
   const mergedSettings = { ...defaultSettings, ...settings };
   const {
@@ -19,6 +22,52 @@ const Carousel = ({settings, images, className, defaultSettings }) => {
     isArrowNavigation,
     isPageDots,
   } = mergedSettings;
+
+  // useEffect(() => {
+  //   console.log('delay', delay);
+  //   console.log('carouselDelay', carouselDelay);
+  //   console.log('autoPlaySpeed', autoPlaySpeed);
+  //   console.log('isAutoPlay', isAutoPlay);
+  //   console.log('isHovered', isHovered);
+  //   console.log('hoverRef', hoverRef);
+  // }, [isHovered, carouselDelay]);
+
+  // If the caller updates the delay prop, update state
+  useEffect(() => {
+    if (! document.hidden && isAutoPlay) {
+      setCarouselDelay(autoPlaySpeed * 1000);
+    }
+  }, [autoPlaySpeed]);
+
+  const startTimer = () => setCarouselDelay(autoPlaySpeed * 1000); // Start by setting delay to the prop given by caller
+  const stopTimer = () => setCarouselDelay(0); // Stop by setting the delay to 0.
+
+  // Hover/-Mouseover
+  useEffect(() => {
+    if (! isHovered) {
+      startTimer();
+    } else {
+      stopTimer();
+    }
+  }, [isHovered]);
+
+  // Next/-Back Buttons/-Arrows
+  useEffect(() => {
+    if (! isPrevNextClicked) {
+      const timeout = setTimeout(() => {
+        setIsPrevNextClicked(true);
+        startTimer();
+      }, carouselDelay);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [isPrevNextClicked]);
+
+  // AUTOPLAY / INTERVAL / setInterval()
+  useInterval(() => {
+    changeSlide(slideIndex + 1);
+  }, isAutoPlay && carouselDelay);
 
   const calculateSlideIndex = (imgIndex, limit) => Math.ceil((imgIndex + 1) / limit); // ex) 9/10 = 1 => 11/10 = 2
 
@@ -44,7 +93,8 @@ const Carousel = ({settings, images, className, defaultSettings }) => {
   };
 
   const handlePrevNextClicked = value => {
-    setIsAutoPlayRunning(false);
+    stopTimer();
+    setIsPrevNextClicked(false);
     changeSlide(value);
   };
 
@@ -62,28 +112,10 @@ const Carousel = ({settings, images, className, defaultSettings }) => {
     }
   };
 
-  // AUTOPLAY / INTERVAL / setInterval()
-  // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-  useInterval(() => {
-    if (! document.hidden && isAutoPlay) {
-      changeSlide(slideIndex + 1);
-    }
-  }, (isAutoPlayRunning && isAutoPlay) ? Number(autoPlaySpeed) * 1000 : null);
-
-  useEffect(() => {
-    if (! isAutoPlayRunning) {
-      const timeout = setTimeout(() => {
-        setIsAutoPlayRunning(true);
-      }, Number(autoPlaySpeed) * 1000);
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [isAutoPlayRunning]);
-
   return (
     <Fragment>
       <div
+        ref={hoverRef}
         className={className}
         style={{
           gridGap: gap,
@@ -116,6 +148,7 @@ const Carousel = ({settings, images, className, defaultSettings }) => {
 
 Carousel.defaultProps = {
   defaultSettings: {
+    delay: 3000,
     autoPlay: false,
     autoPlaySpeed: 3,
     arrowNavigation: true,
