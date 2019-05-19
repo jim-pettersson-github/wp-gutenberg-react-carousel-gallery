@@ -72,7 +72,6 @@ const Carousel = ({settings, images, className, defaultSettings }) => {
 
   useEffect(() => {
     if (! isAutoPlayRunning) {
-      setIsAutoPlayRunning(false);
       const timeout = setTimeout(() => {
         setIsAutoPlayRunning(true);
       }, Number(autoPlaySpeed) * 1000);

@@ -1,6 +1,6 @@
 {
   "name": "jp-guten-gallery-cgb-guten-block",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "private": true,
   "scripts": {
     "start": "cgb-scripts start",
@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "apollo-boost": "^0.3.1",
-    "cgb-scripts": "1.15.0",
-    "graphql": "^14.2.1",
-    "react-apollo": "^2.5.4"
+    "cgb-scripts": "^1.17.0",
+    "graphql": "^14.3.0",
+    "react-apollo": "^2.5.5"
   },
   "devDependencies": {
     "react-dom": "^16.8.6"
