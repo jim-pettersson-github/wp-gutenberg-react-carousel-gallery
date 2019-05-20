@@ -45,19 +45,21 @@ const GalleryContainer = ({ element }) => {
     const newImages = [];
 
     if (graphQLResponse.length > 0) {
-      graphQLResponse.forEach(({ node: { id, mediaItemId, sourceUrl, altText, caption, mediaDetails } }, index) => {
+      graphQLResponse.map(({ node: { id, mediaItemId, sourceUrl, altText, caption, mediaDetails } }, index) => {
         const { sizes } = mediaDetails;
         const imgFromSize = sizes.find(img => img.name === 'polaroid');
+        const dynamicSourceUrl = sizes.find(img => img.name === 'polaroid') ? imgFromSize.sourceUrl : sourceUrl;
+
         newImages.push({
           id: mediaItemId,
-          url: imgFromSize.sourceUrl,
+          url: dynamicSourceUrl,
           sourceUrl: sourceUrl,
           alt: altText,
           caption: caption,
         });
 
         const loadedImg = new Image();
-        loadedImg.src = imgFromSize.sourceUrl;
+        loadedImg.src = dynamicSourceUrl;
 
         // preload images before we swap them in
         if ((imagesPerRow * numerOfRows) >= index) {
