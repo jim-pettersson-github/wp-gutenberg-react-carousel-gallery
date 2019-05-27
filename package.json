@@ -8,10 +8,12 @@
     "eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "apollo-boost": "^0.3.1",
+    "@apollo/react-hooks": "^0.1.0-beta.7",
+    "apollo-boost": "^0.4.0",
     "cgb-scripts": "^1.17.0",
-    "graphql": "^14.3.0",
-    "react-apollo": "^2.5.5"
+    "graphql": "^14.3.1",
+    "lightbox-react": "^0.3.7",
+    "react-apollo": "^2.5.6"
   },
   "devDependencies": {
     "react-dom": "^16.8.6"

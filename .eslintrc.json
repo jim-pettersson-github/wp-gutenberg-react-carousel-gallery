@@ -39,7 +39,7 @@
 		"comma-dangle": ["error", "always-multiline"],
 		"comma-spacing": "error",
 		"comma-style": "error",
-		"computed-property-spacing": ["error", "always"],
+		"computed-property-spacing": ["error", "never"],
 		"constructor-super": "error",
 		"dot-notation": "error",
 		"eol-last": "error",
@@ -143,14 +143,13 @@
 		"no-undef-init": "error",
 		"no-unreachable": "error",
 		"no-unsafe-negation": "error",
-		"no-unused-expressions": "error",
+		"no-unused-expressions": "off",
 		"no-unused-vars": "error",
 		"no-useless-computed-key": "error",
 		"no-useless-constructor": "error",
 		"no-useless-return": "error",
 		"no-var": "error",
 		"no-whitespace-before-property": "error",
-		"object-curly-spacing": ["error", "always"],
 		"padded-blocks": ["error", "never"],
 		"prefer-const": "error",
 		"quote-props": ["error", "as-needed"],
@@ -184,9 +183,10 @@
 				}
 			}
 		],
-		"template-curly-spacing": ["error", "always"],
+		"template-curly-spacing": ["error", "never"],
 		"valid-jsdoc": ["error", { "requireReturn": false }],
 		"valid-typeof": "error",
-		"yoda": "off"
+		"yoda": "off",
+		"curly": ["error", "multi-line"]
 	}
 }

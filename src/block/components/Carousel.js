@@ -4,12 +4,16 @@ import Dots from './CarouselDots';
 import useInterval from './useInterval';
 import useHover from './useHover';
 import { Arrow } from './Icons';
+import Lightbox from 'lightbox-react';
 
 const Carousel = ({ settings, images, className, defaultSettings }) => {
   const [slideIndex, setSlideIndex] = useState(1);
   const [isPrevNextClicked, setIsPrevNextClicked] = useState(false);
   const [animationClass, setAnimationClass] = useState('');
   const [carouselDelay, setCarouselDelay] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxImgIndex, setLightboxImgIndex] = useState(0);
+
   const [hoverRef, isHovered] = useHover();
 
   const mergedSettings = { ...defaultSettings, ...settings };
@@ -88,8 +92,6 @@ const Carousel = ({ settings, images, className, defaultSettings }) => {
     }
 
     return '';
-    // const gg = _className === 'animate-right' ? 'animate-right' : 'animate-left';
-    // return gg;
   };
 
   const handlePrevNextClicked = value => {
@@ -114,12 +116,25 @@ const Carousel = ({ settings, images, className, defaultSettings }) => {
 
   return (
     <Fragment>
+      {isLightboxOpen && (
+        <Lightbox
+          mainSrc={images[lightboxImgIndex].sourceUrl}
+          mainSrcThumbnail={images[lightboxImgIndex].url}
+          imageTitle={images[lightboxImgIndex].alt}
+          imageCaption={images[lightboxImgIndex].caption}
+          nextSrc={images[(lightboxImgIndex + 1) % images.length]}
+          prevSrc={images[(lightboxImgIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsLightboxOpen(false)}
+          onMovePrevRequest={() => setLightboxImgIndex((lightboxImgIndex + images.length - 1) % images.length)}
+          onMoveNextRequest={() => setLightboxImgIndex( (lightboxImgIndex + 1) % images.length)}
+        />
+      )}
       <div
         ref={hoverRef}
         className={className}
         style={{
           gridGap: gap,
-          gridTemplateColumns: `repeat(${ imagesPerRow }, auto)`,
+          gridTemplateColumns: `repeat(${imagesPerRow}, auto)`,
         }}
       >
         { images.map((img, index) => {
@@ -127,12 +142,14 @@ const Carousel = ({ settings, images, className, defaultSettings }) => {
           return (
             <GalleryImage
               key={img.id || img.url}
-              className={`jp-guten-gallery-item ${ calcualteAnimationClass(animationClass, isCurrentSlideIndex) }`}
+              className={`jp-guten-gallery-item ${calcualteAnimationClass(animationClass, isCurrentSlideIndex)}`}
               url={ img.url }
               alt={ img.alt }
               id={ img.id }
               caption={ img.caption }
               hide={! isCurrentSlideIndex}
+              lightboxImgIndex={index}
+              onImgClick={(e) => {setLightboxImgIndex(e); setIsLightboxOpen(true)}}
             />
           );
         })}

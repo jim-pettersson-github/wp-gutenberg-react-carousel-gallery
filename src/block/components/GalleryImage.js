@@ -10,7 +10,7 @@ const { Fragment, useState, useEffect } = wp.element;
 //     caption: image.title,
 //   }
 // ]
-const GalleryImage = ({ className, id, url, sourceUrl, alt, caption, hide }) => {
+const GalleryImage = ({ lightboxImgIndex, onImgClick, className, id, url, sourceUrl, alt, caption, hide }) => {
   // const [isLoaded, setIsLoaded] = useState(true);
   useEffect(() => {
     // setTimeout(() => setIsLoaded(true), 4500);
@@ -31,6 +31,7 @@ const GalleryImage = ({ className, id, url, sourceUrl, alt, caption, hide }) => 
         src={url}
         alt={alt}
         caption={caption}
+        onClick={() => onImgClick && onImgClick(lightboxImgIndex)}
       />
     </div>
   );

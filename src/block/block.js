@@ -212,11 +212,11 @@ registerBlockType( 'jp/guten-block-gallery', {
               // 10 index / 5 imagesPerRow => rad 2 => 2 % 2 === 0
               // 15 index / 5 imagesPerRow => rad 3 => 3 % 2 === 0
               // 20 index / 5 imagesPerRow => rad 4 4 % 2 === 0
-
+              
               return (
-                <Fragment key={img.id || img.url}>
+                <Fragment key={img.id}>
                   <div className={ Math.ceil((index + 1) / imagesPerRow) % numerOfRows === 0 ? 'jp-guten-gallery-item jp-guten-gallery-item-column-gap' : 'jp-guten-gallery-item' }>
-                    <img src={medium.url} alt={img.alt} />
+                    {<img src={medium ? medium.url : img.url} alt={img.alt} />}
                     {/* <GalleryImage
                       className="jp-guten-gallery-item blocks-gallery-item thumbnail
                       url={ img.url }
